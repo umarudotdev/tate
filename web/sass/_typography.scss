@@ -1,0 +1,83 @@
+body {
+  font-family: $font-sans;
+  font-size: $text-base;
+  line-height: $leading-normal;
+  color: $text-secondary;
+  background-color: $bg-base;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-mono;
+  color: $text-primary;
+  line-height: $leading-tight;
+  font-weight: 600;
+}
+
+h1 { font-size: $text-3xl; margin-bottom: $space-lg; }
+h2 { font-size: $text-2xl; margin-top: $space-3xl; margin-bottom: $space-md; }
+h3 { font-size: $text-xl;  margin-top: $space-2xl; margin-bottom: $space-sm; }
+h4 { font-size: $text-lg;  margin-top: $space-xl;  margin-bottom: $space-sm; }
+
+p {
+  margin-bottom: $space-md;
+  max-width: $measure;
+}
+
+a:not(.btn):not(.nav__link):not(.sidebar__link):not(.docs-nav__link):not(.section-title a) {
+  color: $accent;
+  text-decoration: none;
+  background-image: linear-gradient($accent, $accent);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size $duration-normal $ease-out;
+
+  &:hover {
+    background-size: 100% 1px;
+  }
+}
+
+code {
+  font-family: $font-mono;
+  font-size: 0.9em;
+  background: $bg-elevated;
+  padding: 0.15em 0.4em;
+  border-radius: $radius-sm;
+}
+
+pre {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  line-height: $leading-normal;
+  background: $bg-surface;
+  border: 1px solid $border;
+  border-radius: $radius-md;
+  padding: $space-lg;
+  overflow-x: auto;
+  margin-bottom: $space-lg;
+
+  code {
+    background: none;
+    padding: 0;
+    font-size: inherit;
+  }
+}
+
+blockquote {
+  border-left: 3px solid $accent;
+  padding-left: $space-lg;
+  color: $text-primary;
+  font-style: italic;
+  margin: $space-xl 0;
+}
+
+strong {
+  color: $text-primary;
+  font-weight: 600;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid $border;
+  margin: $space-3xl 0;
+}

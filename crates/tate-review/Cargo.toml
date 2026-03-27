@@ -1,0 +1,19 @@
+[package]
+name = "tate-review"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tate-core = { path = "../tate-core" }
+tate-store = { path = "../tate-store" }
+tate-symbols = { path = "../tate-symbols" }
+crossterm = "0.28"
+ratatui = "0.29"
+syntect = { version = "5", default-features = false, features = ["default-themes", "regex-onig", "plist-load"] }
+two-face = "0.5"
+chrono = { version = "0.4", default-features = false, features = ["clock"] }
+tracing = "0.1"
+thiserror = "2"
+
+[dev-dependencies]
+tempfile = "3"

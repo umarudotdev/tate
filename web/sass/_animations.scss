@@ -1,0 +1,70 @@
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 200ms;
+  animation-timing-function: $ease-out;
+}
+
+::view-transition-old(footer),
+::view-transition-new(footer) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(12px) scale(0.96);
+  transition:
+    opacity $duration-normal $ease-out,
+    transform $duration-normal $ease-out;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+@for $i from 1 through 8 {
+  .reveal-stagger > :nth-child(#{$i}) {
+    transition-delay: #{($i - 1) * 60}ms;
+  }
+}
+
+.hero-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: hero-enter $duration-slow $ease-out forwards;
+}
+
+@for $i from 1 through 5 {
+  .hero-reveal:nth-child(#{$i}) {
+    animation-delay: #{($i - 1) * 100 + 100}ms;
+  }
+}
+
+@keyframes hero-enter {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .hero-reveal {
+    opacity: 1;
+    transform: none;
+    animation: none;
+    transition: none;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+

@@ -1,0 +1,46 @@
+.callout {
+  border-radius: $radius-md;
+  corner-shape: squircle;
+  padding: $space-lg;
+  margin: $space-lg 0;
+  border-left: 3px solid;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.callout--note {
+  background: rgba($accent, 0.05);
+  border-color: $accent;
+}
+
+.callout--tip {
+  background: rgba($accent-green, 0.05);
+  border-color: $accent-green;
+}
+
+.callout--warning {
+  background: rgba($accent-yellow, 0.05);
+  border-color: $accent-yellow;
+}
+
+.callout__title {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  margin-bottom: $space-sm;
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+
+  .callout--note & { color: $accent; }
+  .callout--tip & { color: $accent-green; }
+  .callout--warning & { color: $accent-yellow; }
+
+  svg {
+    width: 16px;
+    height: 16px;
+    stroke-width: 2;
+  }
+}

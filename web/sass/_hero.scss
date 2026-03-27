@@ -1,0 +1,224 @@
+.hero {
+  position: relative;
+  margin-top: -3.5rem;
+  padding: calc(#{$space-5xl} + 3.5rem) 0 $space-2xl;
+  text-align: center;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    margin-top: 0;
+    padding: $space-3xl 0 $space-xl;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(to bottom, transparent, $bg-base);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  opacity: 0.2;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 2px,
+      rgba(0, 0, 0, 0.3) 2px,
+      rgba(0, 0, 0, 0.3) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 50%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+    pointer-events: none;
+    z-index: 2;
+  }
+}
+
+.hero__noise {
+  position: absolute;
+  inset: 0;
+  filter: url(#noise);
+  opacity: 0.15;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.hero__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.5;
+  mix-blend-mode: screen;
+
+  &--1 {
+    top: 5%;
+    left: 15%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, $accent-purple 0%, transparent 70%);
+    animation: glow-drift-1 14s ease-in-out infinite alternate;
+  }
+
+  &--2 {
+    bottom: 10%;
+    right: 10%;
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, $accent-cyan 0%, transparent 70%);
+    animation: glow-drift-2 18s ease-in-out infinite alternate-reverse;
+  }
+}
+
+@keyframes glow-drift-1 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, -30px) scale(1.15); }
+  100% { transform: translate(-20px, 20px) scale(1.05); }
+}
+
+@keyframes glow-drift-2 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-30px, 25px) scale(1.2); }
+  100% { transform: translate(25px, -15px) scale(0.95); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__glow {
+    animation: none;
+  }
+}
+
+.hero__tagline {
+  font-family: $font-mono;
+  font-size: $text-hero;
+  font-weight: 700;
+  color: $text-primary;
+  line-height: $leading-tight;
+  max-width: 20ch;
+  margin: 0 auto $space-lg;
+
+  @media (max-width: 768px) {
+    font-size: $text-3xl;
+  }
+}
+
+.hero__description {
+  font-size: $text-lg;
+  color: $text-tertiary;
+  max-width: 52ch;
+  margin: 0 auto $space-2xl;
+  line-height: $leading-relaxed;
+}
+
+.hero__actions {
+  display: flex;
+  gap: $space-md;
+  justify-content: center;
+  margin-bottom: $space-4xl;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    margin-bottom: $space-2xl;
+  }
+}
+
+.btn {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  padding: $space-sm $space-xl;
+  user-select: none;
+  border-radius: 999px;
+  corner-shape: squircle;
+  transition:
+    background-color $duration-fast $ease-out,
+    border-color $duration-fast $ease-out,
+    transform $duration-fast $ease-spring;
+  display: inline-flex;
+  align-items: center;
+  gap: $space-sm;
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+.btn--primary {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0) 50%
+    ),
+    $accent;
+  color: $bg-base;
+  font-weight: 600;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 1px 3px rgba(0, 0, 0, 0.2);
+  transition:
+    box-shadow $duration-normal $ease-out,
+    transform $duration-fast $ease-spring;
+
+  &:hover {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.15) 0%,
+        rgba(255, 255, 255, 0) 50%
+      ),
+      lighten($accent, 8%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.15),
+      0 2px 8px rgba(0, 0, 0, 0.25),
+      0 0 16px rgba($accent, 0.3),
+      0 0 40px rgba($accent, 0.15);
+  }
+}
+
+.btn--secondary {
+  background: transparent;
+  color: $text-secondary;
+  border: 1px solid $border;
+
+  &:hover {
+    border-color: $border-hover;
+    color: $text-primary;
+  }
+}
+
+.hero__terminal {
+  max-width: 640px;
+  margin: 0 auto;
+}

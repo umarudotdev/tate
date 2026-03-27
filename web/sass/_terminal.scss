@@ -1,0 +1,110 @@
+.terminal {
+  background: $bg-surface;
+  border: 1px solid $border;
+  border-radius: $radius-lg;
+  corner-shape: squircle;
+  overflow: hidden;
+  position: relative;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.3),
+    0 1px 3px rgba(0, 0, 0, 0.2);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 15%;
+    right: 15%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba($accent, 0.2), transparent);
+    z-index: 1;
+  }
+}
+
+.terminal__header {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-sm $space-lg;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border;
+}
+
+.terminal__copy {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-xs;
+  border-radius: $radius-sm;
+  color: $text-quaternary;
+  cursor: pointer;
+  transition:
+    color $duration-fast $ease-out,
+    background-color $duration-fast $ease-out;
+
+  &:hover {
+    color: $text-secondary;
+    background: rgba($text-primary, 0.06);
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  &--copied {
+    color: $accent-green;
+
+    &:hover {
+      color: $accent-green;
+    }
+  }
+}
+
+.terminal__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+
+  &--red    { background: $accent-red; opacity: 0.7; }
+  &--yellow { background: $accent-yellow; opacity: 0.7; }
+  &--green  { background: $accent-green; opacity: 0.7; }
+}
+
+.terminal__title {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-quaternary;
+  margin-left: $space-sm;
+}
+
+.terminal__body {
+  padding: $space-lg;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  line-height: $leading-relaxed;
+  color: $text-secondary;
+  overflow-x: auto;
+
+  .prompt {
+    color: $accent-green;
+    user-select: none;
+  }
+
+  .command {
+    color: $text-primary;
+  }
+
+  .input {
+    color: $accent;
+  }
+
+  .muted {
+    color: $text-tertiary;
+  }
+
+  .accent {
+    color: $accent;
+  }
+}

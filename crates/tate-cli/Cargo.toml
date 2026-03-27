@@ -1,0 +1,25 @@
+[package]
+name = "tate-cli"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "tate"
+path = "src/main.rs"
+
+[dependencies]
+tate-core = { path = "../tate-core" }
+tate-store = { path = "../tate-store" }
+tate-review = { path = "../tate-review" }
+tate-hooks = { path = "../tate-hooks" }
+tate-symbols = { path = "../tate-symbols" }
+clap = { version = "4", features = ["derive"] }
+serde_json = "1"
+syntect = { version = "5", default-features = false, features = ["default-themes"] }
+two-face = "0.5"
+chrono = { version = "0.4", default-features = false, features = ["clock"] }
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[dev-dependencies]
+tempfile = "3"
+serde_json = "1"

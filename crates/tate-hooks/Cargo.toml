@@ -1,0 +1,12 @@
+[package]
+name = "tate-hooks"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tate-store = { path = "../tate-store" }
+tate-symbols = { path = "../tate-symbols" }
+chrono = { version = "0.4", default-features = false, features = ["clock"] }
+regex = "1"
+tracing = "0.1"
+thiserror = "2"

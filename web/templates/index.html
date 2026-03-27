@@ -1,0 +1,246 @@
+{% extends "base.html" %}
+
+{% block title %}Tate - {{ config.extra.tagline }}{% endblock title %}
+
+{% block content %}
+<main>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__bg" aria-hidden="true" style="background-image: url('{{ get_url(path='hero-bg.png') }}')">
+      <div class="hero__noise"></div>
+      <div class="hero__glow hero__glow--1"></div>
+      <div class="hero__glow hero__glow--2"></div>
+    </div>
+    <svg style="position:absolute;width:0;height:0" aria-hidden="true">
+      <filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter>
+    </svg>
+    <div class="container">
+      <h1 class="hero__tagline hero-reveal">Understand the code you ship.</h1>
+      <p class="hero__description hero-reveal">Tate is Anki for your codebase. Spaced repetition that closes the gap between "this code exists" and "I can defend this."</p>
+      <div class="hero__actions hero-reveal">
+        <a href="{{ get_url(path='@/docs/installation.md') }}" class="btn btn--primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>Install</a>
+        <a href="{{ get_url(path='@/docs/_index.md') }}" class="btn btn--secondary">Documentation</a>
+      </div>
+      <div class="hero__terminal hero-reveal">
+        <div class="terminal">
+          <div class="terminal__header">
+            <span class="terminal__dot terminal__dot--red"></span>
+            <span class="terminal__dot terminal__dot--yellow"></span>
+            <span class="terminal__dot terminal__dot--green"></span>
+          </div>
+          <div class="terminal__body">
+            <div><span class="prompt">$ </span><span class="command">tate review</span></div>
+            <br>
+            <div>&nbsp;&nbsp;<span class="accent">src/auth/login.ts::authenticate</span></div>
+            <div>&nbsp;&nbsp;<span class="muted">Review #3 &middot; Last reviewed 8 days ago</span></div>
+            <br>
+            <div>&nbsp;&nbsp;What happens when the token is expired but the</div>
+            <div>&nbsp;&nbsp;refresh token is still valid?</div>
+            <br>
+            <div>&nbsp;&nbsp;<span class="muted">[1] Again  [2] Hard  [3] Good  [4] Easy</span></div>
+            <br>
+            <div><span class="prompt">&gt; </span><span class="input">3</span></div>
+            <br>
+            <div>&nbsp;&nbsp;<span class="muted">Next review: April 5</span></div>
+            <div>&nbsp;&nbsp;<span class="muted">0 cards remaining today.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section id="problem" class="section">
+    <div class="container">
+      <div class="problem reveal">
+        <p class="problem__text">Tests verify behavior. Code review checks style. Git blame tracks authorship. <strong>Nothing verifies that anyone actually understands the code that shipped.</strong></p>
+        <p class="problem__text">That gap is invisible until it isn't. A teammate leaves and nobody can touch their module. AI writes a function and you ship it because the tests pass. You copy a pattern from Stack Overflow and move on. The code works, but you can't defend it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who it's for -->
+  <section id="use-cases" class="section section--surface section--dots">
+    <div class="container">
+      <h2 class="section-title reveal"><a href="#use-cases"><span class="section-anchor__hash">#</span>Code you can't defend</a></h2>
+      <div class="usecases reveal-stagger">
+        <div class="usecase reveal">
+          <!-- Lucide: bot -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+          <span class="usecase__text">The AI wrote it. The tests pass. You shipped it. Could you rewrite it from scratch?</span>
+        </div>
+        <div class="usecase reveal">
+          <!-- Lucide: user-x -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="17" x2="22" y1="8" y2="13"/><line x1="22" x2="17" y1="8" y2="13"/></svg>
+          <span class="usecase__text">Someone left. Their module is yours now. You've read it twice and still can't explain it.</span>
+        </div>
+        <div class="usecase reveal">
+          <!-- Lucide: package -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m16.5 9.4-9-5.19"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" x2="12" y1="22.08" y2="12"/></svg>
+          <span class="usecase__text">You vendored a library. Your app depends on three functions you've never opened.</span>
+        </div>
+        <div class="usecase reveal">
+          <!-- Lucide: clock -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span class="usecase__text">You wrote it six months ago. It works. You have no idea why.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="section section--glow">
+    <div class="container">
+      <h2 class="section-title reveal"><a href="#features"><span class="section-anchor__hash">#</span>Built for developers</a></h2>
+      <div class="features-grid reveal-stagger">
+        <div class="feature-card reveal">
+          <div class="feature-card__icon">
+            <!-- Lucide: brain -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></svg>
+          </div>
+          <div class="feature-card__title">SM-2 Algorithm</div>
+          <div class="feature-card__description">The same proven scheduling behind Anki. You review what's fading, skip what you know. ~15 min/day.</div>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card__icon">
+            <!-- Lucide: code -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <div class="feature-card__title">26+ Languages</div>
+          <div class="feature-card__description">Track individual functions, not just files. Tree-sitter extracts symbols from Rust, TypeScript, Python, Go, and more.</div>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card__icon">
+            <!-- Lucide: git-commit-horizontal -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><line x1="3" x2="9" y1="12" y2="12"/><line x1="15" x2="21" y1="12" y2="12"/></svg>
+          </div>
+          <div class="feature-card__title">Git Hook Auto-Add</div>
+          <div class="feature-card__description">AI-assisted commits automatically populate your deck. No bookkeeping required.</div>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card__icon">
+            <!-- Lucide: bot -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+          </div>
+          <div class="feature-card__title">Agent Skill</div>
+          <div class="feature-card__description">Your AI writes code, then writes the review card. Drop-in skill for Claude Code, Cursor, and others.</div>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card__icon">
+            <!-- Lucide: refresh-cw -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>
+          </div>
+          <div class="feature-card__title">Change Detection</div>
+          <div class="feature-card__description">Code changed? Card resets. Understanding is never permanent. It's earned, maintained, and re-earned.</div>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-card__icon">
+            <!-- Lucide: file-text -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+          </div>
+          <div class="feature-card__title">Plain Text Deck</div>
+          <div class="feature-card__description">One entry per line in .tate/deck. Human-readable, grep-friendly, no lock-in.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Loop -->
+  <section id="how-it-works" class="section section--surface section--dots">
+    <div class="container">
+      <h2 class="section-title reveal"><a href="#how-it-works"><span class="section-anchor__hash">#</span>How it works</a></h2>
+      <div class="deck reveal">
+        <div class="deck__hitzone"></div>
+        <div class="deck__card deck__card--1" tabindex="0">
+          <div class="deck__face deck__face--front">
+            <div class="deck__hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg></div>
+            <div class="deck__number">1</div>
+            <div class="deck__title">Code enters your deck</div>
+          </div>
+          <div class="deck__face deck__face--back">
+            <div class="deck__answer">Manually, via git hook, or automatically by your AI coding agent.</div>
+          </div>
+        </div>
+        <div class="deck__card deck__card--2" tabindex="0">
+          <div class="deck__face deck__face--front">
+            <div class="deck__hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg></div>
+            <div class="deck__number">2</div>
+            <div class="deck__title">Questions test understanding</div>
+          </div>
+          <div class="deck__face deck__face--back">
+            <div class="deck__answer">Not "what does this do?" but "what breaks if this assumption stops being true?"</div>
+          </div>
+        </div>
+        <div class="deck__card deck__card--3" tabindex="0">
+          <div class="deck__face deck__face--front">
+            <div class="deck__hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg></div>
+            <div class="deck__number">3</div>
+            <div class="deck__title">Review on schedule</div>
+          </div>
+          <div class="deck__face deck__face--back">
+            <div class="deck__answer">Grade your understanding: Again, Hard, Good, or Easy. One keypress.</div>
+          </div>
+        </div>
+        <div class="deck__card deck__card--4" tabindex="0">
+          <div class="deck__face deck__face--front">
+            <div class="deck__hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg></div>
+            <div class="deck__number">4</div>
+            <div class="deck__title">Spaced repetition schedules you</div>
+          </div>
+          <div class="deck__face deck__face--back">
+            <div class="deck__answer">SM-2, the algorithm behind Anki. Reviews stay bounded at ~15 min/day.</div>
+          </div>
+        </div>
+        <div class="deck__card deck__card--5" tabindex="0">
+          <div class="deck__face deck__face--front">
+            <div class="deck__hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg></div>
+            <div class="deck__number">5</div>
+            <div class="deck__title">Code changes, understanding resets</div>
+          </div>
+          <div class="deck__face deck__face--back">
+            <div class="deck__answer">Modified code is detected automatically. You re-earn understanding.</div>
+          </div>
+        </div>
+      </div>
+      <div class="deck__arrows">
+        <button class="deck__arrow deck__arrow--prev" aria-label="Previous card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="deck__arrow deck__arrow--next" aria-label="Next card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Philosophy + Install -->
+  <section id="philosophy" class="section philosophy-section">
+    <div class="philosophy-section__bg" aria-hidden="true" style="background-image: url('{{ get_url(path='philosophy-bg.png') }}')">
+      <div class="hero__noise"></div>
+    </div>
+    <div class="container">
+      <div class="philosophy reveal">
+        <blockquote class="philosophy__quote">Everyone is building tools to write more code faster. Nobody is building tools to make sure you still understand what ships.</blockquote>
+        <p class="philosophy__sub">Understanding decays. Tate brings it back.</p>
+        <div class="install philosophy__install">
+          <div class="terminal">
+            <div class="terminal__header">
+              <span class="terminal__dot terminal__dot--red"></span>
+              <span class="terminal__dot terminal__dot--yellow"></span>
+              <span class="terminal__dot terminal__dot--green"></span>
+              <button class="terminal__copy" type="button" aria-label="Copy to clipboard" title="Copy to clipboard" data-copy="cargo install tate-cli&#10;cd your-project && tate init&#10;tate review">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+              </button>
+            </div>
+            <div class="terminal__body">
+              <div><span class="prompt">$ </span><span class="command">cargo install tate-cli</span></div>
+              <div><span class="prompt">$ </span><span class="command">cd your-project && tate init</span></div>
+              <div><span class="prompt">$ </span><span class="command">tate review</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock content %}

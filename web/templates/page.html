@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} - {{ config.title }}{% endblock title %}
+{% block description %}{{ page.description | default(value=config.description) }}{% endblock description %}
+
+{% block content %}
+<main class="section">
+  <div class="container">
+    <div class="docs-layout">
+      <aside class="sidebar">
+        <details class="sidebar__mobile" open>
+          <summary class="sidebar__toggle">Documentation</summary>
+          <nav class="sidebar__nav">
+            {% set docs_section = get_section(path="docs/_index.md") %}
+
+            <details class="sidebar__group" open>
+              <summary class="sidebar__group-title">Getting Started</summary>
+              <div class="sidebar__group-links">
+                {% for p in docs_section.pages %}
+                  {% if p.extra.group is defined and p.extra.group == "start" %}
+                    <a href="{{ p.permalink }}"
+                       class="sidebar__link{% if current_path == p.path %} sidebar__link--active{% endif %}">
+                      {{ p.title }}
+                    </a>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </details>
+
+            <details class="sidebar__group" open>
+              <summary class="sidebar__group-title">Reference</summary>
+              <div class="sidebar__group-links">
+                {% for p in docs_section.pages %}
+                  {% if p.extra.group is defined and p.extra.group == "reference" %}
+                    <a href="{{ p.permalink }}"
+                       class="sidebar__link{% if current_path == p.path %} sidebar__link--active{% endif %}">
+                      {{ p.title }}
+                    </a>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </details>
+
+            <details class="sidebar__group" open>
+              <summary class="sidebar__group-title">Integration</summary>
+              <div class="sidebar__group-links">
+                {% for p in docs_section.pages %}
+                  {% if p.extra.group is defined and p.extra.group == "integration" %}
+                    <a href="{{ p.permalink }}"
+                       class="sidebar__link{% if current_path == p.path %} sidebar__link--active{% endif %}">
+                      {{ p.title }}
+                    </a>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </details>
+          </nav>
+        </details>
+      </aside>
+
+      <div class="docs-content">
+        <h1>{{ page.title }}</h1>
+        {{ page.content | safe }}
+
+        {% if page.lower or page.higher %}
+          <nav class="docs-nav">
+            {% if page.lower %}
+              <a href="{{ page.lower.permalink }}" class="docs-nav__card docs-nav__card--prev">
+                <span class="docs-nav__label">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="15 18 9 12 15 6"/></svg>
+                  Previous
+                </span>
+                <span class="docs-nav__title">{{ page.lower.title }}</span>
+              </a>
+            {% else %}
+              <span></span>
+            {% endif %}
+            {% if page.higher %}
+              <a href="{{ page.higher.permalink }}" class="docs-nav__card docs-nav__card--next">
+                <span class="docs-nav__label">
+                  Next
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="9 18 15 12 9 6"/></svg>
+                </span>
+                <span class="docs-nav__title">{{ page.higher.title }}</span>
+              </a>
+            {% else %}
+              <span></span>
+            {% endif %}
+          </nav>
+        {% endif %}
+      </div>
+
+      {% if page.toc %}
+        <aside class="docs-toc">
+          <div class="docs-toc__inner">
+            <div class="docs-toc__title">On this page</div>
+            <ul class="docs-toc__list">
+              {% for h in page.toc %}
+                <li>
+                  <a href="{{ h.permalink }}">{{ h.title }}</a>
+                  {% if h.children %}
+                    <ul>
+                      {% for child in h.children %}
+                        <li><a href="{{ child.permalink }}">{{ child.title }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </aside>
+      {% endif %}
+    </div>
+  </div>
+</main>
+{% endblock content %}

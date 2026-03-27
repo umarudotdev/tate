@@ -1,0 +1,10 @@
+[workspace]
+members = [
+    "crates/tate-core",
+    "crates/tate-store",
+    "crates/tate-symbols",
+    "crates/tate-review",
+    "crates/tate-hooks",
+    "crates/tate-cli",
+]
+resolver = "2"

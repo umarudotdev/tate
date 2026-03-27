@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}{{ section.title }} - {{ config.title }}{% endblock title %}
+{% block description %}{{ section.description | default(value=config.description) }}{% endblock description %}
+
+{% block content %}
+<main class="section">
+  <div class="container">
+    <div class="docs-layout">
+      <aside class="sidebar">
+        <details class="sidebar__mobile" open>
+          <summary class="sidebar__toggle">Documentation</summary>
+          <nav class="sidebar__nav">
+            <details class="sidebar__group" open>
+              <summary class="sidebar__group-title">Getting Started</summary>
+              <div class="sidebar__group-links">
+                {% for page in section.pages %}
+                  {% if page.extra.group is defined and page.extra.group == "start" %}
+                    <a href="{{ page.permalink }}"
+                       class="sidebar__link{% if current_path == page.path %} sidebar__link--active{% endif %}">
+                      {{ page.title }}
+                    </a>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </details>
+
+            <details class="sidebar__group" open>
+              <summary class="sidebar__group-title">Reference</summary>
+              <div class="sidebar__group-links">
+                {% for page in section.pages %}
+                  {% if page.extra.group is defined and page.extra.group == "reference" %}
+                    <a href="{{ page.permalink }}"
+                       class="sidebar__link{% if current_path == page.path %} sidebar__link--active{% endif %}">
+                      {{ page.title }}
+                    </a>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </details>
+
+            <details class="sidebar__group" open>
+              <summary class="sidebar__group-title">Integration</summary>
+              <div class="sidebar__group-links">
+                {% for page in section.pages %}
+                  {% if page.extra.group is defined and page.extra.group == "integration" %}
+                    <a href="{{ page.permalink }}"
+                       class="sidebar__link{% if current_path == page.path %} sidebar__link--active{% endif %}">
+                      {{ page.title }}
+                    </a>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </details>
+          </nav>
+        </details>
+      </aside>
+      <div class="docs-content">
+        <div class="docs-hero">
+          <div class="docs-hero__text">
+            <h1>{{ section.title }}</h1>
+            {{ section.content | safe }}
+          </div>
+          <div class="docs-hero__img">
+            <img src="{{ get_url(path='philosophy-bg.png') }}" alt="" loading="lazy">
+          </div>
+        </div>
+        {% if section.pages %}
+          <div class="docs-index">
+            {% for page in section.pages %}
+              <a href="{{ page.permalink }}" class="docs-index__card">
+                <span class="docs-index__title">{{ page.title }}</span>
+                {% if page.description %}
+                  <span class="docs-index__desc">{{ page.description }}</span>
+                {% endif %}
+              </a>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock content %}
